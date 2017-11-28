@@ -6,25 +6,25 @@ By default, the hostname is "ROS-EDU".  Follow these steps to change it to your 
 1. Open a terminal window and issue the following commands, one at a time:
 	
 	- Enter the following command and change `127.0.1.1	ROS-EDU` to `127.0.1.1	yourUBusername`:
-	```
-	sudo pico /etc/hosts
-	```
+		```
+		sudo pico /etc/hosts
+		```
 	
 	- Enter the following command and change from `ROS-EDU` to `yourUBusername`:
-	```
-	sudo pico /etc/hostname
-	```
+		```
+		sudo pico /etc/hostname
+		```
 		
-	*You'll probably get an error message...don't worry*
+		*You'll probably get an error message...don't worry*
 
 	- Finally, tell Ubuntu about the changes you made:
-	```
-	sudo /etc/init.d/hostname.sh
-	```
+		```
+		sudo /etc/init.d/hostname.sh
+		```
 		
-	*You'll probably get an error message...don't worry*
+		*You'll probably get an error message...don't worry*
 
-2. Now, reboot your Ubuntu machine
+2. Now, reboot your Ubuntu machine.
 
 3. When the system reboots, open a terminal window.  
 	
@@ -100,11 +100,15 @@ You will need to create the following 4 files (examples have been provided):
 
 We also need the `one_robot.launch` file, but **do not edit it**.  This launcher will be the same for all races.
 
-See Brayton's tutorial (LINK) for detailed insructions.
+See Brayton's tutorial (NEED TO INSERT LINK) for detailed instructions.
 
 ---
+# Running the Code
+For testing purposes, it is recommended that you start with the "standalone" version.  This will require you to run gazebo on your machine.  
 
-# Standalone Version (Not Networked)
+For the in-class contest, we will run in "networked" mode.
+
+## Standalone Version (not networked)
 1. Open Gazebo and place the turtlebots on the track:
 	```
 	cd ~/catkin_ws/src/turtlebotrace/scripts
@@ -139,10 +143,10 @@ See Brayton's tutorial (LINK) for detailed insructions.
 	
 ---
 
-# Networked Version 
+## Networked Version 
 This version is currently incomplete.  When it is working:
 
-## On the Tower computer (server):
+### On the Tower computer (server):
 1. Set master
 	```
 	export ROS_MASTER_URI=http://darkstar:11311
@@ -165,7 +169,7 @@ This version is currently incomplete.  When it is working:
 	NOTE: This script requires one input argument, which is the name of the race.  Replace `murray` with the UBusername matching what you used in Step 2.
 
 
-## On your computer (client):
+### On your computer (client):
 - Set master
 	```
 	export ROS_MASTER_URI=http://darkstar:11311
