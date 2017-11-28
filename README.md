@@ -5,19 +5,19 @@ By default, the hostname is "ROS-EDU".  Follow these steps to change it to your 
 
 1. Open a terminal window and issue the following commands, one at a time:
 	
-	- ```
+	```
 	sudo pico /etc/hosts
 	```
 	Change `127.0.1.1	ROS-EDU` to `127.0.1.1	yourUBusername`
 
-	- ```
+	```
 	sudo pico /etc/hostname
 	```
 	Change from `ROS-EDU` to `yourUBusername`
 
 	*You'll probably get an error message...don't worry*
 
-	- ```
+	```
 	sudo /etc/init.d/hostname.sh
 	```
 	*You'll probably get an error message...don't worry*
