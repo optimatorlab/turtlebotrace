@@ -1,0 +1,6 @@
+string hostname
+---
+int32 robotID
+float32 init_x
+float32 init_y
+bool isRaceStarted
