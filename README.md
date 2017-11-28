@@ -14,12 +14,14 @@ By default, the hostname is "ROS-EDU".  Follow these steps to change it to your 
 	```
 	sudo pico /etc/hostname
 	```
+		
 		*You'll probably get an error message...don't worry*
 
 	- Finally, tell Ubuntu about the changes you made:
 	```
 	sudo /etc/init.d/hostname.sh
 	```
+		
 		*You'll probably get an error message...don't worry*
 
 2. Now, reboot your Ubuntu machine
