@@ -1,0 +1,15 @@
+% FILE: race_params_murray.txt
+% 
+% Each line starting with a percent sign is a comment.
+% x coordinates for 10 robots' initial positions:
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9 
+% y coordinates for 10 robots' initial positions:
+0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+% NOTE 1:  The starting line must be either vertical (same x coordinates) or horizontal (same y coordinates). 
+% NOTE 2:  These x and y coordinates must match EXACTLY what is specified in robots_yourUBusername.launch.
+%
+% Range of x coordinates for the finish rectangle (min, max):
+8, 9
+% Range of y coordinates for the finish rectangle (min, max):
+5, 6
+% NOTE:  The min and max values for the finish should be different (so we have a rectangle, not a line).
