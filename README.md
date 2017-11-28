@@ -1,28 +1,3 @@
-TO DO
-
-x Include networking instructions.
-
-- Update Tower:
-	- Accept input of race.
-	- Read the race params.
-	- Verify the race params.
-		- 10 x's
-		- 10 y's
-		- either all x's are the same or all y's are the same.
-		- finish rectangle is properly defined.
-	- Monitor for entering the finish rectangle.
-	- Keep track of the number of robots?
-	
-- Create the installer script, install_turtlebotrace.sh
-	
-- Upload code to github
-
-- Test the installer script
-
-- Send a slack message to the class
-
----
-
 # Networking Instructions
 
 ## Changing the hostname on your Ubuntu machine
@@ -61,28 +36,33 @@ By default, the hostname is "ROS-EDU".  Follow these steps to change it to your 
 ---
 
 
-# Install the turtlebotrace (one time--initialization)
+# Install the "turtlebotrace" Package 
+*You only need to do this when there's new code to download/install*
 
-	# FIXME -- DOWNLOAD FROM GITHUB
+1. Clone the master branch from github to your Ubuntu machine.  We will remove any existing clones first.
 	```
 	cd ~/Downloads
-	rm turtlebotrace
-	git clone ... github.com/optimatorlab/turtlebotrace
+	rm -rf turtlebotrace
+	git clone -b master https://github.com/optimatorlab/turtlebotrace.git
+	```
+
+2. Run the automated installer script:
+	```
+	cd ~/Downloads/turtlebotrace
+	chmod +x install_turtlebotrace.sh
+	./install_turtlebotrace.sh
+	chmod -x install_turtlebotrace.sh
 	```
 	
-	# FIXME -- PROVIDE AN INSTALLER SCRIPT
-			Extract the contents of turtlebotrace.zip into ~/catkin_ws/src/turtlebotrace
-			Make a copy of the user's files (on the desktop)
-
-			cd ~/catkin_ws/src
-			catkin_create_pkg turtlebotrace
-		
-			cd ~/catkin_ws
-			catkin_make
-
+3. Go ahead and delete the clone from your Downloads:
+	```
+	cd ~/Downloads
+	rm -rf turtlebotrace
+	```
+	
 ---
 
-# Create a race:
+# Create a Race:
 
 You will need to create the following 4 files (examples have been provided):
 1. `course_yourUBusername.world`
@@ -142,17 +122,19 @@ See Brayton's tutorial (LINK) for detailed insructions.
 3. Launch your controller node:
 	```
 	cd ~/catkin_ws/src/turtlebotrace/scripts
-	rosrun turtlebotrace my_controller_murray.py 
+	rosrun turtlebotrace my_robot_controller_testing.py 
 	```
 
-	NOTE: Each student will create their own controller script.  Replace `murray` with your UBusername to run your control algorithm.  This doesn't have to match the name of the race (you will be using your controller to race on tracks created by other users).
+	NOTE: Each student will create their own controller script.  Replace `testing` with your UBusername to run your control algorithm.  This doesn't have to match the name of the race (you will be using your controller to race on tracks created by other users).
 
 4. Launch your keyboard controller (only for testing purposes):
 	```
 	cd ~/catkin_ws/src/turtlebotrace/scripts
-	rosrun turtlebotrace key_publisher.py 
+	rosrun turtlebotrace key_publisher.py ROBOTID
 	```
-
+	
+	NOTE: Replace `ROBOTID` with the ID number of the robot you wish to control.
+	
 ---
 
 # Networked Version 
@@ -189,62 +171,8 @@ This version is currently incomplete.  When it is working:
 - Run controller
 	```
 	cd ~/catkin_ws/src/turtlebotrace/scripts
-	rosrun turtlebotrace my_controller_murray.py 
+	rosrun turtlebotrace my_robot_controller_testing.py 
 	```
 
-	NOTE: Each student will create their own controller script.  Replace `murray` with your UBusername to run your control algorithm.  This doesn't have to match the name of the race (you will be using your controller to race on tracks created by other users).
-
---- 
-
-<!--
-DELETE THIS STUFF
-
-(optional) Customization:
-	
-	roscd followbot
-	gedit course.launch &
-
-	WORLD INFO:
-		roscd gazebo_ros
-		cd launch
-		pico empty_world.launch
-
-			Note the argument names.  
-			See where we pass them from our course.launch file?
-
-		course.world --> course.material --> course.png
-
-	ROBOT INFO:
-		roscd turtlebot_gazebo
-		cd launch/includes
-		ls
-		pico kobuki.launch.xml
-
-			Note that we have passed 3 arguments to this .xml file.
-	
-		# roscd gazebo_ros
-		cd /opt/ros/indigo/lib/gazebo_ros/
-		pico spawn_model
-	
-			Note that we can provide x/y/z/roll/pitch/yaw info
-			Let's try changing the model name
-
-
-	
-	More Info:
-		rostopic list
-
-		rostopic echo /odom
-		rostopic echo /mobile_base/events/bumper 
-		rostopic echo /mobile_base/sensors/imu_data
-		rostopic echo /mobile_base/sensors/imu_data/orientation/
-		rostopic echo /mobile_base/sensors/imu_data/orientation/w
-
--->
-
-
-
-
-
-
+	NOTE: Each student will create their own controller script.  Replace `testing` with your UBusername to run your control algorithm.  This doesn't have to match the name of the race (you will be using your controller to race on tracks created by other users).
 
