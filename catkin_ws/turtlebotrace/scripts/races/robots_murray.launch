@@ -17,6 +17,7 @@
 			<arg name="base" value="kobuki"/>
 			<arg name="stacks" value="hexagons"/>
 			<arg name="3d_sensor" value="kinect"/>	
+			<arg name="color" value="red"/>	
 		</include>
 	</group>
 
@@ -28,8 +29,22 @@
 			<arg name="robot_name"  value="Robot2" />
 			<arg name="base" value="kobuki"/>
 			<arg name="stacks" value="hexagons"/>
-			<arg name="3d_sensor" value="kinect"/>		
+			<arg name="3d_sensor" value="kinect"/>
+			<arg name="color" value="blue"/>	
 		</include>
 	</group> 
+	
+	
+	<!-- NEED TO CREATE ROBOTS 3 THRU 10 -->
+	<!-- Use these colors in order (the tower will announce the ID/color pairing so you know which robot is yours):
+	green
+	orange
+	purple
+	pink
+	yellow
+	white
+	black
+	brown	
+	-->
 
 </launch>
