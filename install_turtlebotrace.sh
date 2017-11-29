@@ -27,10 +27,14 @@ if echo "$answer" | grep -iq "^y" ;then
 	MYFILE="${HOME}/Desktop/turtlebotrace_archive_${timestamp}.tar.bz2"
 	# echo ${MYFILE}
 
-	# Create the archive:
-	tar -chjvf ${MYFILE} ${HOME}/catkin_ws/src/turtlebotrace
-	echo -e "${YELLOW}Your backup archive is saved as ${MYFILE}.${NC}"
-	echo ""
+	# Create the archive (but only if that directory already exists):
+	if [ -d "${HOME}/catkin_ws/src/turtlebotrace" ]; then
+		tar -chjvf ${MYFILE} ${HOME}/catkin_ws/src/turtlebotrace
+		echo -e "${YELLOW}Your backup archive is saved as ${MYFILE}.${NC}"
+		echo ""
+	else
+		echo "You don't have a turtlebotrace package.  No backup is being created."
+	fi	
 
 	# Store the present working directory:
 	myPWD=$PWD
@@ -60,9 +64,9 @@ if echo "$answer" | grep -iq "^y" ;then
 	catkin_make
 			
 	echo ""
-	echo "The installation script is done."
+	echo "The installation script is done.  See ~/catkin_ws/src/turtlebotrace."
 	echo ""
-	echo "Your backup archive is saved as ${MYFILE}"
+	echo "Your backup archive is saved as ${MYFILE} (if you already had a turtlebotrace package install)."
 	echo ""	
 	
 	# If appropriate, remind the user to change the hostname
