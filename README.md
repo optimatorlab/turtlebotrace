@@ -1,3 +1,5 @@
+*Updated Monday, Nov. 29, 2017*
+
 # Networking Instructions
 
 ## Changing the hostname on your Ubuntu machine
@@ -103,6 +105,75 @@ We also need the `one_robot.launch` file, but **do not edit it**.  This launcher
 See Brayton's tutorial (NEED TO INSERT LINK) for detailed instructions.
 
 ---
+
+# Coloring your turtlebots
+
+1.  Use gimp to open `~/catkin_ws/src/turtlebotrace/robots/meshes/images/3f_stack_template.xcf`.
+
+	**Do not overwrite this file.**  In the next step you will **export** to .jpg images.
+
+2.  **Export** the following .jpg images with the appropriate number:
+	- 3f_stack_green.jpg			#3
+	- 3f_stack_orange.jpg			#4
+	- 3f_stack_purple.jpg			#5
+	- 3f_stack_pink.jpg				#6
+	- 3f_stack_yellow.jpg			#7
+	- 3f_stack_white.jpg			#8
+	- 3f_stack_black.jpg			#9
+	- 3f_stack_brown.jpg			#10
+
+	All of these files should be saved in `~/catkin_ws/src/turtlebotrace/robots/meshes/images/`.  Red and blue versions are already there.
+
+	If necessary, change the font color of the ID number.  Try to choose your colors/shading for maximum contrast.  We want to be able to easily identify our robots.
+	
+	
+3. Use your text editor to create these files (editing them so they reference the appropriate color):
+	- plate_top_green.dae
+	- plate_top_orange.dae
+	- plate_top_purple.dae
+	- plate_top_pink.dae
+	- plate_top_yellow.dae
+	- plate_top_white.dae
+	- plate_top_black.dae
+	- plate_top_brown.dae
+
+	See line 140 of `plate_top_red.dae`.  This is the line you need to edit, from `<init_from>./images/3f_stack_red.jpg</init_from>` to the appropriate color name.
+	
+	All of these files should be saved in `~/catkin_ws/src/turtlebotrace/robots/meshes`.  Red and blue versions are already there.
+
+4. Use your text editor to create these files (editing them so they reference the appropriate color):
+	- hexagons_green.urdf.xacro
+	- hexagons_orange.urdf.xacro
+	- hexagons_purple.urdf.xacro
+	- hexagons_pink.urdf.xacro
+	- hexagons_yellow.urdf.xacro
+	- hexagons_white.urdf.xacro
+	- hexagons_black.urdf.xacro
+	- hexagons_brown.urdf.xacro
+
+	Find line 220 of `hexagons_red.urdf.xacro`.  This is the line you need to edit, from `<mesh filename="package://turtlebotrace/robots/meshes/plate_top_blue.dae"/>` to the appropriate color name.
+
+	All of these files should be saved in `~/catkin_ws/src/turtlebotrace/robots/urdf`.  Red and blue versions are already there.
+	
+5.  Use your text editor to create these files (editing them so they reference the appropriate color):
+	- kobuki_hexagons_kinect_green.urdf.xacro:
+	- kobuki_hexagons_kinect_orange.urdf.xacro:
+	- kobuki_hexagons_kinect_purple.urdf.xacro:
+	- kobuki_hexagons_kinect_pink.urdf.xacro:
+	- kobuki_hexagons_kinect_yellow.urdf.xacro:
+	- kobuki_hexagons_kinect_white.urdf.xacro:
+	- kobuki_hexagons_kinect_black.urdf.xacro:
+	- kobuki_hexagons_kinect_brown.urdf.xacro:
+
+	The line you need to edit should be obvious.  Change the color appropriately.
+	
+	All of these files should be saved in `~/catkin_ws/src/turtlebotrace/robots/`.  Red and blue versions are already there.
+
+6. Create the `robots_yourUBusername.launch` file, using `robots_murray.launch` as a template.  Create the 10 robots and place them in the appropriate locations for your racetrack.
+
+
+---
+
 # Running the Code
 For testing purposes, it is recommended that you start with the "standalone" version.  This will require you to run gazebo on your machine.  
 
