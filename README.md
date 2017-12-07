@@ -280,8 +280,8 @@ For the in-class contest, we will run in "networked" mode.
 
 ## Networked Version 
 These instructions assume that 
-	- There is a computer named `darkstar` that will be the "master".  Replace `darkstar` everywhere below if another computer is used as the master.
-	- The race is `murray`.  Replace `murray` with the appropriate username to run a different race.
+- There is a computer named `darkstar` that will be the "master".  Replace `darkstar` everywhere below if another computer is used as the master.
+- The race is `murray`.  Replace `murray` with the appropriate username to run a different race.
 		
 	 
 ### On the Tower computer (server):
