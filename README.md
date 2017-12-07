@@ -35,7 +35,33 @@ By default, the hostname is "ROS-EDU".  Follow these steps to change it to your 
 	If not, go back to Step 1 and repeat.
 
 ## Edit the list of IP addresses for everyone in class.
-- **Murray will post a message to Slack with more info.  Still waiting for everyone to get connected to the router.**
+
+1. Make a backup of your file:
+	`sudo cp /etc/hosts /etc/hosts.bak`
+
+2. Open the /etc/hosts file for editing:
+	`sudo pico /etc/hosts`
+
+3. Paste the following lines into the **bottom** of the /etc/hosts file:
+	```
+	192.168.0.100   darkstar
+	192.168.0.102   darkstar-wifi
+	192.168.0.105   braytonc
+	192.168.0.106   ianmarre
+	192.168.0.107   kylevand
+	192.168.0.108   leurysme
+	192.168.0.109   mpreasor
+	192.168.0.110   shanegam
+	192.168.0.111   ntrichte
+	192.168.0.112   andrewko
+	192.168.0.113   qzhang42
+	```
+
+4. Save the /etc/hosts file by hitting `ctrl-o`.
+
+5. Exit pico by hitting `ctrl-x`.
+
+6. Reboot your virtual machine.
 
 ---
 
