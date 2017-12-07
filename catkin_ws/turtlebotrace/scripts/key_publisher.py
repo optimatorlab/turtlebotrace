@@ -16,7 +16,7 @@ if __name__ == '__main__':
 	
 	myKeyTopic = "keys%d" % (robotID)
 	key_pub = rospy.Publisher(myKeyTopic, String, queue_size=1)
-	rospy.init_node("keyboard_driver")
+	rospy.init_node("keyboard_driver", anonymous=True)
 	rate = rospy.Rate(100)
 	old_atr = termios.tcgetattr(sys.stdin)
 	tty.setcbreak(sys.stdin.fileno())

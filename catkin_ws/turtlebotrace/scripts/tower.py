@@ -10,9 +10,9 @@ from parseCSVstring import *
 
 from kobuki_msgs.msg import BumperEvent
 
-from demo_0.srv import get_id
-from demo_0.msg import telem
-from demo_0.msg import start_race
+from turtlebotrace.srv import get_id
+from turtlebotrace.msg import telem
+from turtlebotrace.msg import start_race
 
 	
 class make_turtle:

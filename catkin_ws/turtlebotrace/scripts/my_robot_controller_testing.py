@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-
+import numpy
+import math
 import rospy
 import socket
 
@@ -8,9 +9,9 @@ from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import LaserScan
 
-from demo_0.msg import telem
-from demo_0.srv import get_id
-from demo_0.msg import start_race
+from turtlebotrace.msg import telem
+from turtlebotrace.srv import get_id
+from turtlebotrace.msg import start_race
 
 
 # This is only used for manual control:	
@@ -31,6 +32,7 @@ class myController():
 		
 		# Initialize our clearance ahead:
 		self.range_ahead = 0.0
+		self.range_ahead_angle = 0.0
 		
 		# Initialize the flag to tell us if the race has started:
 		self.isRaceStart = False
@@ -70,7 +72,7 @@ class myController():
 		rospy.Subscriber("start_race", start_race, self.start_race_callback)
 
 		# Define our publisher for the telemetry info:
-		pubTelem = rospy.Publisher('telem', telem, queue_size=10)
+		pubTelem = rospy.Publisher('telem', telem, queue_size=1)
 
 		# Define the twist publisher based on robotID:
 		myTwistTopic = "/robot%d/cmd_vel_mux/input/teleop" % (myID)
@@ -123,10 +125,30 @@ class myController():
 		# rospy.loginfo(data)
 		
 		# Find the middle element of the ranges array. 
+		'''
 		# FIXME -- This might not be the best way to detect obstacles!
 		self.range_ahead = data.ranges[len(data.ranges)/2]
 		print "range = ", self.range_ahead
+		'''
 		
+		# A better approach, courtesy of Andrew...
+		# Find (1) the minimum distance detected by our scanner, and 
+		# (2) the angle corresponding to that obstacle.
+		matrx = data.ranges
+		# print matrx
+		self.range_ahead = numpy.nanmin(matrx)
+		#print self.range_ahead
+		print self.range_ahead
+		if (numpy.isnan(self.range_ahead)):
+			self.range_ahead = -1 	# This means that we didn't detect an obstacle
+			self.range_ahead_angle = -math.atan(1.0)*4.0 
+		else:
+			rangeIdx = matrx.index(self.range_ahead)
+			self.range_ahead_angle = data.angle_min+rangeIdx*(data.angle_max -data.angle_min)/len(matrx) 
+		                
+		print "range = ", self.range_ahead, " angle = ", self.range_ahead_angle*180/3.14
+	
+	
 	def start_race_callback(self, data):
 		print "I got start race info:"
 		rospy.loginfo(data)
