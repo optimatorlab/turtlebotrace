@@ -1,4 +1,4 @@
-*Updated Monday, Nov. 29, 2017*
+*Updated Thursday, Dec. 7, 2017*
 
 # Networking Instructions
 
@@ -71,7 +71,7 @@ By default, the hostname is "ROS-EDU".  Follow these steps to change it to your 
 You will need to create the following 4 files (examples have been provided):
 1. `course_yourUBusername.world`
 	
-	This is where you define the racetrack.
+	This is where you define the racetrack.  See the section below on "Creating a .world File".
 
 2. `robots_yourUBusername.launch`
 
@@ -82,28 +82,57 @@ You will need to create the following 4 files (examples have been provided):
 	Edit this file to make sure it references your versions of `course_yourUBusername.world` and `robots_yourUBusername.launch`.
 	
 4. `race_params_yourUBusername.txt`
+
+	For example, here's the file for a racetrack named "murray":
+
 	```
 	% FILE: race_params_murray.txt
-	%
+	% 
 	% Each line starting with a percent sign is a comment.
 	% x coordinates for 10 robots' initial positions:
-	0, 1, 2, 3, 4, 5, 6, 7, 8, 9 
+	1, 2, 3, 4, 5, 6, 7, 8, 9, 10 
 	% y coordinates for 10 robots' initial positions:
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 	% NOTE 1:  The starting line must be either vertical (same x coordinates) or horizontal (same y coordinates). 
 	% NOTE 2:  These x and y coordinates must match EXACTLY what is specified in robots_yourUBusername.launch.
 	%
 	% Range of x coordinates for the finish rectangle (min, max):
-	8, 9
+	15, 19
 	% Range of y coordinates for the finish rectangle (min, max):
-	5, 6
+	0, 3
 	% NOTE:  The min and max values for the finish should be different (so we have a rectangle, not a line).
 	```
 
 We also need the `one_robot.launch` file, but **do not edit it**.  This launcher will be the same for all races.
 
-See Brayton's tutorial (NEED TO INSERT LINK) for detailed instructions.
+## Creating a .world File
+1. Open the `sample_racetrack.xls` spreadsheet in LibreOffice Calc (on your Ubuntu machine).
+2. Change the x and y coordinates as you like (as long as they are integer valued).  A plot is provided so you can visualize your track. You should assume that each turtlebot occupies a 1x1 unit of space.
+3. When you're done editing the spreadsheet, save it as `sample_racetrack.csv`.  This is in a **comma-delimited** format. 
+	- NOTE 1:  This should be saved in `~/catkin_ws/src/turtlebotrace/scripts/races/`.
+	- NOTE 2:  Cell A1 should start with a % sign.  This indicates that this row is a comment (not an actual x,y coordinate).
+	- NOTE 3:  You should open the .csv file with a text editor (e.g., gedit) to verify that it looks like this (*your numbers may differ, but the format should be the same*):
+	```
+	% x,y,description (optional)
+	0,-1,south west wall (starting line)
+	1,-1,
+	2,-1,
+	```
+4. A Python script has been written to convert your `.csv` file into a `.world` file.  Enter these commands in the terminal:
+	```
+	cd ~/catkin_ws/src/turtlebotrace/scripts/races
+	python create_world.py
+	```
+5. Rename the resulting `.world` file to be `course_yourUBusername.world` (replacing "yourUBusername" with your actual UB username).
 
+6. Take a look at your world in gazebo:
+	```
+	cd ~/catkin_ws/src/turtlebotrace/scripts/races
+	gazebo course_yourUBusername.world
+	```
+	(of course by now you know to replace "yourUBusername" with your actual UB username).
+	
+	
 ---
 
 # Coloring your turtlebots
@@ -180,7 +209,7 @@ For testing purposes, it is recommended that you start with the "standalone" ver
 For the in-class contest, we will run in "networked" mode.
 
 ## Standalone Version (not networked)
-1. Open Gazebo and place the turtlebots on the track:
+1. **Terminal 1** -- Open Gazebo and place the turtlebots on the track:
 	```
 	cd ~/catkin_ws/src/turtlebotrace/scripts
 	roslaunch turtlebotrace race_murray.launch
@@ -188,7 +217,7 @@ For the in-class contest, we will run in "networked" mode.
 	
 	NOTE: Replace `murray` with a different UBusername to run a different race.
 	
-2. Start the tower: 
+2. **Terminal 2** -- Start the tower: 
 	```
 	cd ~/catkin_ws/src/turtlebotrace/scripts
 	rosrun turtlebotrace tower.py murray
@@ -196,7 +225,7 @@ For the in-class contest, we will run in "networked" mode.
 
 	NOTE: This script requires one input argument, which is the name of the race.  Replace `murray` with the UBusername matching what you used in Step 1.
 
-3. Launch your controller node:
+3. **Terminal 3** -- Launch your controller node:
 	```
 	cd ~/catkin_ws/src/turtlebotrace/scripts
 	rosrun turtlebotrace my_robot_controller_testing.py 
@@ -204,52 +233,69 @@ For the in-class contest, we will run in "networked" mode.
 
 	NOTE: Each student will create their own controller script.  Replace `testing` with your UBusername to run your control algorithm.  This doesn't have to match the name of the race (you will be using your controller to race on tracks created by other users).
 
-4. Launch your keyboard controller (only for testing purposes):
+4. **Terminal 4** -- Launch your keyboard controller (only for testing purposes):
 	```
 	cd ~/catkin_ws/src/turtlebotrace/scripts
-	rosrun turtlebotrace key_publisher.py ROBOTID
+	rosrun turtlebotrace key_publisher.py the_Integer_RobotID_given_to_you_by_the_tower
 	```
 	
-	NOTE: Replace `ROBOTID` with the ID number of the robot you wish to control.
+	- For example, if you were assigned RobotID 1, that last command would be `rosrun turtlebotrace key_publisher.py 1`.
+	
+5. Go back to **Terminal 2** and hit `Enter` to release the game.  
+
+	- Your robot won't move until the tower has given the go-ahead signal.
+
+6. Return to **Terminal 4** and use the `w` (forward), `a` (spin left), `d` (spin right), `x` (backwards), and `s` (stop) keys.
+
+	- When you're done with the keyboard controller, hit `Ctrl-Z`.  
+	- If you use Ctrl-C, the terminal window will probably freeze.  In that case, you'll have to close/re-open Terminal 4.
 	
 ---
 
 ## Networked Version 
-This version is currently incomplete.  When it is working:
-
+These instructions assume that 
+	- There is a computer named `darkstar` that will be the "master".  Replace `darkstar` everywhere below if another computer is used as the master.
+	- The race is `murray`.  Replace `murray` with the appropriate username to run a different race.
+		
+	 
 ### On the Tower computer (server):
-1. Set master
+1. **Terminal 1** -- Set master and launch gazebo:
 	```
 	export ROS_MASTER_URI=http://darkstar:11311
-	```
-	
-2. Launch gazebo
-	```
 	cd ~/catkin_ws/src/turtlebotrace/scripts
 	roslaunch turtlebotrace race_murray.launch
 	```
 	
-	NOTE: Replace `murray` with a different UBusername to run a different race.
+	- Replace `darkstar` with the name of the computer that will run the tower. 
+	- Replace `murray` with a different UBusername to run a different race.
 	
-3. Run tower
+3. **Terminal 2** -- Set master and run tower:
 	```
+	export ROS_MASTER_URI=http://darkstar:11311
 	cd ~/catkin_ws/src/turtlebotrace/scripts
 	rosrun turtlebotrace tower.py murray
 	```
 
-	NOTE: This script requires one input argument, which is the name of the race.  Replace `murray` with the UBusername matching what you used in Step 2.
+	NOTE: This script requires one input argument, which is the name of the race.  Replace `murray` with the UBusername matching what you used in Step 1.
 
 
 ### On your computer (client):
-- Set master
+1. **Terminal 1** -- Set master and run robot controller:
 	```
 	export ROS_MASTER_URI=http://darkstar:11311
-	```
-- Run controller
-	```
 	cd ~/catkin_ws/src/turtlebotrace/scripts
 	rosrun turtlebotrace my_robot_controller_testing.py 
 	```
 
 	NOTE: Each student will create their own controller script.  Replace `testing` with your UBusername to run your control algorithm.  This doesn't have to match the name of the race (you will be using your controller to race on tracks created by other users).
+
+2. **Terminal 2** (FOR TESTING ONLY) -- Run the manual keyboard controller:
+	```
+	export ROS_MASTER_URI=http://darkstar:11311
+	cd ~/catkin_ws/src/turtlebotrace/scripts
+	rosrun turtlebotrace key_publisher.py the_Integer_RobotID_given_to_you_by_the_tower
+	```
+	
+	- For example, if you were assigned RobotID 3, that last command would be `rosrun turtlebotrace key_publisher.py 3`.
+
 
