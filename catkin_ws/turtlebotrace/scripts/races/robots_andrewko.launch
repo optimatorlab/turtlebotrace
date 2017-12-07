@@ -108,7 +108,7 @@
 			<arg name="base" value="kobuki"/>
 			<arg name="stacks" value="hexagons"/>
 			<arg name="3d_sensor" value="kinect"/>
-			<arg name="color" value="white"/>	
+			<arg name="color" value="black"/>	
 		</include>
 	</group> 
 	<!-- BEGIN ROBOT 9-->  
@@ -120,7 +120,7 @@
 			<arg name="base" value="kobuki"/>
 			<arg name="stacks" value="hexagons"/>
 			<arg name="3d_sensor" value="kinect"/>
-			<arg name="color" value="black"/>	
+			<arg name="color" value="white"/>	
 		</include>
 	</group> 
 	
