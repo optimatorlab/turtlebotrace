@@ -147,8 +147,8 @@ We also need the `one_robot.launch` file, but **do not edit it**.  This launcher
 	- 3f_stack_purple.jpg			#5
 	- 3f_stack_pink.jpg				#6
 	- 3f_stack_yellow.jpg			#7
-	- 3f_stack_white.jpg			#8
-	- 3f_stack_black.jpg			#9
+	- 3f_stack_black.jpg			#8
+	- 3f_stack_white.jpg			#9
 	- 3f_stack_brown.jpg			#10
 
 	All of these files should be saved in `~/catkin_ws/src/turtlebotrace/robots/meshes/images/`.  Red and blue versions are already there.
@@ -276,10 +276,12 @@ These instructions assume that
 	rosrun turtlebotrace tower.py murray
 	```
 
-	NOTE: This script requires one input argument, which is the name of the race.  Replace `murray` with the UBusername matching what you used in Step 1.
+	- NOTE 1: This script requires one input argument, which is the name of the race.  Replace `murray` with the UBusername matching what you used in Step 1.
+	
+	- NOTE 2: The robots won't be able to move until you "release the game" by hitting `Enter` in this terminal window.
 
 
-### On your computer (client):
+### On the Client Computer:
 1. **Terminal 1** -- Set master and run robot controller:
 	```
 	export ROS_MASTER_URI=http://darkstar:11311
@@ -298,4 +300,5 @@ These instructions assume that
 	
 	- For example, if you were assigned RobotID 3, that last command would be `rosrun turtlebotrace key_publisher.py 3`.
 
+3. Tell the person running the Tower to "release the game" by hitting `Enter` in their Terminal 2.
 
