@@ -43,20 +43,9 @@ By default, the hostname is "ROS-EDU".  Follow these steps to change it to your 
 	`sudo pico /etc/hosts`
 
 3. Paste the following lines into the **bottom** of the /etc/hosts file:
-	```
-	192.168.0.100   darkstar
-	192.168.0.102   darkstar-wifi
-	192.168.0.105   braytonc
-	192.168.0.106   ianmarre
-	192.168.0.107   kylevand
-	192.168.0.108   leurysme
-	192.168.0.109   mpreasor
-	192.168.0.110   shanegam
-	192.168.0.111   ntrichte
-	192.168.0.112   andrewko
-	192.168.0.113   qzhang42
-	```
-
+	
+	(oops...the list of IP address / hostname pairings has been removed.)
+	
 4. Save the /etc/hosts file by hitting `ctrl-o`.
 
 5. Exit pico by hitting `ctrl-x`.
