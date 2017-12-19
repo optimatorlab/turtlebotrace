@@ -1,4 +1,4 @@
-*Updated Thursday, Dec. 7, 2017*
+*Updated Monday, Dec. 18, 2017*
 
 # Networking Instructions
 
